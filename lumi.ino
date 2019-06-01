@@ -54,7 +54,7 @@ void loop() {
   autoBtn();
  
   if (Serial.available()) {
-    char data = Serial.read(); // reading the data received from the bluetooth module
+    char data = Serial.read(); // lê data enviado pelo bluetooth
     if (data == 'a') {
       ligar();  // ligar ou desligar
     }
@@ -62,7 +62,5 @@ void loop() {
       if (flagAuto = true) {
         flagAuto = false;
       }
-    }
-      flagAuto = true; //  auto
     }
   }
