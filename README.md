@@ -7,7 +7,7 @@ Controlada via app android.
 - Botão toggle liga / desliga;
 - Botão bluetooth para conexão com o HC-05;
 - Botão AUTO (regula a intensidade da luminária de acordo com a luz do ambiente via LDR);
-- Slider de intensidade para ajuste da intensidade manual
+- Slider de intensidade para ajuste da luminosidade manualmente.
 
 # Imagens do aplicativo
 
