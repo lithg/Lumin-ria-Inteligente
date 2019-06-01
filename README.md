@@ -1,6 +1,6 @@
 # Luminária-Inteligente
-Código fonte do software utilizado na cadeira de eletrônica da unicap. 
-Controlada via android app..
+Código fonte do software utilizado na cadeira de eletrônica da UNICAP. 
+Controlada via app android.
 
 
 # Funções
