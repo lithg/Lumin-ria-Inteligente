@@ -1,12 +1,15 @@
-//TODO
+
+
 /*
- * 7 - AUTO fazendo override na barra de luz
- * 8 - Bluetooth exibindo mensagem conectado mesmo quando desconecta
- * 12 - App crasha se mexer na barra de luz antes de conectar o bluetooth
+ * Inclui a biblioteca "Dimmer.h" necessária para
+ * o controle da intensidade luminosa
  */
- 
- 
+
 #include "Dimmer.h"
+
+/*
+ * Seta os pinos e flags utilizados
+ */
 
 Dimmer lamp(3);
 int ldrPin = A0;
@@ -14,12 +17,25 @@ int relePin = 7;
 int readBluetooth;
 boolean flagLigado = false;
 boolean flagAuto = false;
- 
- 
+
+
+//--------------FUNCÕES---------------//
+
+
+/*
+ * Função que liga a luminária
+ */
+
 void ligar() {
   digitalWrite(relePin, !digitalRead(relePin));
   flagLigado = !flagLigado;
 }
+
+
+/*
+ * Função que ajusta o valor da luminária
+ * de acordo com a barra de luz
+ */
  
 void barraLuz() {
   if (flagAuto == false && flagLigado == true) {
@@ -27,11 +43,13 @@ void barraLuz() {
   lamp.set(valorBarra);  
   }
 }
- 
-// LUZ DO CELULAR: 68
-// NORMAL SALA: 85
-// DEDO NO LDR: 98
- 
+
+
+/*
+ * Função que controla automaticamente a intensidade
+ * da luminária baseado no valor de leitura do LDR
+ */
+
 void autoBtn (){
   flagAuto = !flagAuto;    
   if (flagAuto == true) {
@@ -41,26 +59,41 @@ void autoBtn (){
       delay(10);
   }    
 }
+
+
+//----------FIM DAS FUNÇÕES-----------//
+
+/*
+ * Setup que inicializa as variáveis necessárias
+ */
  
 void setup() {
   lamp.begin();
   Serial.begin(9600);
   pinMode(relePin, OUTPUT);
-  digitalWrite(relePin, HIGH);  // O relé é acionado em LOW
+  digitalWrite(relePin, HIGH);  // O relé inicia desligado
 }
+
+/*
+ * Loop responsável pelo funcionamento do código 
+ */
  
 void loop() {
-  barraLuz();
-  autoBtn();
  
-  if (Serial.available()) {
-    char data = Serial.read(); // lê data enviado pelo bluetooth
-    if (data == 'a') {
-      ligar();  // ligar ou desligar
+  if (Serial.available()) {               // Se receber dados do bluetooth
+    char data = Serial.read();           // lê o dado enviado pelo bluetooth
+    if (data == 'a') {                  // Se dado for 'a'
+      ligar();                         // chama a função 'ligar()' que liga ou desliga a luminária
     }
-    else if (data == 'b') {
-      if (flagAuto = true) {
-        flagAuto = false;
-      }
+    else if (data == 'b') {           // Se dado for 'b'
+      autoBtn();                     // Chama a função 'autoBtn()' que 
+                                    // deixa a lumiária em modo automático       
     }
+
+  else if (data == 'c') {         // Se dado for 'c'
+     barraLuz();                 // Chama a função 'barraLuz()' que
+                                //  Atualiza a intensidade da luminária para o valor da barra
   }
+ }
+  delay(10);
+}
