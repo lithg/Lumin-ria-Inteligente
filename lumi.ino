@@ -40,7 +40,7 @@ void ligar() {
 void barraLuz() {
   if (flagAuto == false && flagLigado == true) {
     int valorBarra = Serial.read();
-  lamp.set(valorBarra);  
+    lamp.set(valorBarra);  
   }
 }
 
