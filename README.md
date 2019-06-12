@@ -1,6 +1,6 @@
 # Luminária-Inteligente
-Código fonte do projeto utilizado na cadeira de eletrônica da UNICAP. 
-Controlada via app android.
+Código fonte do projeto utilizado na disciplina de eletrônica da UNICAP. 
+Controlada via app android + conexão bluetooth.
 
 
 # Funções
